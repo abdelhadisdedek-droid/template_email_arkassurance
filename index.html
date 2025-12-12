@@ -12,23 +12,21 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif; /* Plus sûr pour les e-mails */
+            font-family: 'Arial', sans-serif; 
             background-color: #f4f7fa;
         }
         .email-container {
             max-width: 600px;
             margin: 0 auto;
             background-color: #ffffff;
-            border-radius: 8px; /* Léger arrondi */
-            overflow: hidden; /* Pour contenir les éléments */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Légère ombre */
+            border-radius: 8px; 
+            overflow: hidden; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
         }
         /* Couleurs inspirées de votre charte graphique */
         .color-primary-dark { color: #1e3a8a; } /* Bleu foncé */
         .color-primary-blue { color: #3b82f6; } /* Bleu principal */
-        .color-accent-turq { color: #4dc0c9; } /* Turquoise/Cyan (utilisé pour les badges/liens) */
-        .bg-color-primary-dark { background-color: #1e3a8a; }
-        .bg-color-soft { background-color: #f0f8ff; } /* Bleu très clair pour fond/status box */
+        .color-accent-turq { color: #4dc0c9; } /* Turquoise/Cyan */
 
         /* Header (Avec Logo et Banniére-texte) */
         .header {
@@ -38,7 +36,7 @@
             text-align: center;
         }
         .logo-img {
-            max-width: 150px; /* Taille appropriée pour un logo d'e-mail */
+            max-width: 80px; /* Taille appropriée pour le bouclier/logo */
             height: auto;
             display: block;
             margin: 0 auto 15px;
@@ -50,7 +48,7 @@
             margin: 0;
         }
         .tagline {
-            color: #dbeafe; /* Bleu très clair */
+            color: #dbeafe; 
             font-size: 14px;
             margin-top: 5px;
         }
@@ -72,7 +70,7 @@
             margin: 20px 0;
         }
 
-        /* Status Box - Mis en évidence par les couleurs */
+        /* Status Box */
         .status-box {
             background-color: #e0f2fe; /* Bleu clair */
             border-left: 4px solid #3b82f6; /* Bordure Bleu principal */
@@ -105,9 +103,9 @@
             margin-top: 5px;
         }
 
-        /* Info Box - Utilisation du bleu foncé pour l'importance */
+        /* Info Box */
         .info-box {
-            background-color: #f0f9ff; /* Bleu très très clair */
+            background-color: #f0f9ff; 
             border-left: 4px solid #1e3a8a; /* Bordure Bleu foncé */
             padding: 15px 20px;
             margin: 25px 0;
@@ -120,7 +118,7 @@
             line-height: 1.6;
         }
         .info-box strong {
-             color: #1e3a8a; /* Titre en gras en bleu foncé */
+             color: #1e3a8a; 
         }
         .divider {
             height: 1px;
@@ -158,10 +156,10 @@
              margin: 5px 0;
         }
 
-        /* Lien de l'espace client (Ajouté) */
+        /* Lien de l'espace client (CTA) */
         .cta-button {
             display: inline-block;
-            background-color: #3b82f6; 
+            background-color: #3b82f6; /* Bleu principal pour le bouton */
             color: #ffffff !important; 
             text-decoration: none;
             padding: 12px 25px;
@@ -169,13 +167,19 @@
             font-weight: bold;
             font-size: 16px;
             margin-top: 15px;
+            /* Styles pour Outlook */
+            mso-padding-alt: 0;
+            mso-border-alt: 1px solid #3b82f6;
+        }
+        .cta-button span {
+            mso-text-raise: 15pt;
         }
     </style>
 </head>
 <body>
     <div class="email-container">
         <div class="header">
-            <img src="[URL_DE_VOTRE_LOGO_SHIELD_ICI]" alt="Logo ARKX ASSURANCE" class="logo-img" width="80" height="auto" />
+            <img src="https://raw.githubusercontent.com/abdelhadisdedek-droid/template_email_arkassurance/main/logo.png" alt="Logo ARKX ASSURANCE" class="logo-img" width="80" height="auto" />
             
             <h1 class="header-title">Protection Intelligente</h1>
             <p class="tagline">Propulsée par l'Intelligence Artificielle</p>
@@ -204,9 +208,8 @@
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
-                <a href="[LIEN_VERS_VOTRE_ESPACE_CLIENT_ICI]" class="cta-button">
-                    Accéder à mon Espace Client
-                </a>
+                <a href="https://arkxassurance-dev-ed.trailblaze.my.site.com/arkxassurance" class="cta-button" style="text-decoration:none;">
+                    Accéder à mon Espace Client</a>
             </div>
             
             <p class="message" style="margin-top: 25px;">
@@ -250,7 +253,7 @@ NOUVEAU STATUT : {!Claim__c.Status__c}
 
 PROCHAINES ÉTAPES :
 Notre équipe vous contactera très prochainement pour vous accompagner dans la suite du traitement de votre dossier.
-Vous pouvez consulter l'avancement détaillé sur votre Espace Client : [LIEN_VERS_VOTRE_ESPACE_CLIENT_ICI]
+Consultez l'avancement détaillé sur votre Espace Client : https://arkxassurance-dev-ed.trailblaze.my.site.com/arkxassurance
 
 Nous restons à votre disposition pour toute question ou information complémentaire concernant votre sinistre.
 
