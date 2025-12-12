@@ -1,7 +1,5 @@
-<messaging:emailTemplate subject="Mise à jour de votre dossier de sinistre - {!Claim__c.Name}" recipientType="Contact" relatedToType="Claim__c">
+<messaging:emailTemplate subject="Mise à jour de votre dossier de sinistre - {!relatedTo.Name}" recipientType="Contact" relatedToType="Claim__c">
 <messaging:htmlEmailBody >
-<!DOCTYPE html>
-<html>
 <head>
     <style>
         /* Styles de base pour la compatibilité maximale */
@@ -9,7 +7,8 @@
         table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
         img { -ms-interpolation-mode: bicubic; }
 
-        body {
+        /* Remplacement du body par un wrapper pour la couleur de fond */
+        .page-wrapper { 
             margin: 0;
             padding: 0;
             font-family: 'Arial', sans-serif; 
@@ -23,14 +22,12 @@
             overflow: hidden; 
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
         }
-        /* Couleurs inspirées de votre charte graphique */
-        .color-primary-dark { color: #1e3a8a; } /* Bleu foncé */
-        .color-primary-blue { color: #3b82f6; } /* Bleu principal */
-        .color-accent-turq { color: #4dc0c9; } /* Turquoise/Cyan */
+        
+        .color-primary-dark { color: #1e3a8a; } 
+        .color-primary-blue { color: #3b82f6; } 
+        .color-accent-turq { color: #4dc0c9; } 
 
-        /* Header (Avec Logo et Banniére-texte) */
         .header {
-            /* Inspiré de votre dégradé bleu-violet de la bannière */
             background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #6b21a8 100%);
             padding: 20px 30px;
             text-align: center;
@@ -52,8 +49,6 @@
             font-size: 14px;
             margin-top: 5px;
         }
-
-        /* Content */
         .content {
             padding: 30px;
         }
@@ -69,11 +64,9 @@
             line-height: 1.6;
             margin: 20px 0;
         }
-
-        /* Status Box */
         .status-box {
-            background-color: #e0f2fe; /* Bleu clair */
-            border-left: 4px solid #3b82f6; /* Bordure Bleu principal */
+            background-color: #e0f2fe; 
+            border-left: 4px solid #3b82f6; 
             padding: 20px;
             margin: 25px 0;
             border-radius: 8px;
@@ -94,7 +87,7 @@
         }
         .status-badge {
             display: inline-block;
-            background-color: #4dc0c9; /* Turquoise/Cyan pour le statut */
+            background-color: #4dc0c9; 
             color: #ffffff;
             padding: 8px 18px;
             border-radius: 20px;
@@ -102,11 +95,9 @@
             font-weight: 700;
             margin-top: 5px;
         }
-
-        /* Info Box */
         .info-box {
             background-color: #f0f9ff; 
-            border-left: 4px solid #1e3a8a; /* Bordure Bleu foncé */
+            border-left: 4px solid #1e3a8a; 
             padding: 15px 20px;
             margin: 25px 0;
             border-radius: 6px;
@@ -125,8 +116,6 @@
             background-color: #e2e8f0;
             margin: 30px 0;
         }
-        
-        /* Footer */
         .footer {
             background-color: #f8fafc;
             padding: 30px;
@@ -169,8 +158,6 @@
             text-decoration: none;
             font-weight: bold;
         }
-
-        /* Lien de l'espace client (CTA) */
         .cta-button {
             display: inline-block;
             background-color: #3b82f6; 
@@ -189,7 +176,7 @@
         }
     </style>
 </head>
-<body>
+<div class="page-wrapper"> 
     <div class="email-container">
         <div class="header">
             <img src="https://raw.githubusercontent.com/abdelhadisdedek-droid/template_email_arkassurance/main/logo.png" alt="Logo ARKX ASSURANCE" class="logo-img" width="80" height="auto" />
@@ -199,7 +186,7 @@
         </div>
         
         <div class="content">
-            <p class="greeting">Bonjour **{!Contact.FirstName} {!Contact.LastName}**, </p>
+            <p class="greeting">Bonjour **{!recipient.FirstName} {!recipient.LastName}**, </p>
             
             <p class="message">
                 Nous tenons à vous informer que votre dossier de sinistre a été mis à jour. Vous trouverez ci-dessous les détails de cette mise à jour.
@@ -207,10 +194,10 @@
             
             <div class="status-box">
                 <div class="status-label">Numéro de sinistre</div>
-                <div class="claim-number">{!Claim__c.Name}</div>
+                <div class="claim-number">**{!relatedTo.Name}**</div>
                 
                 <div class="status-label">Nouveau statut</div>
-                <span class="status-badge">{!Claim__c.Status__c}</span>
+                <span class="status-badge">**{!relatedTo.Status__c}**</span>
             </div>
             
             <div class="info-box">
@@ -257,17 +244,16 @@
             </p>
         </div>
     </div>
-</body>
-</html>
+</div>
 </messaging:htmlEmailBody>
 
 <messaging:plainTextEmailBody>
-Bonjour {!Contact.FirstName} {!Contact.LastName},
+Bonjour {!recipient.FirstName} {!recipient.LastName},
 
 Nous tenons à vous informer que votre dossier de sinistre a été mis à jour.
 
-NUMÉRO DE SINISTRE : {!Claim__c.Name}
-NOUVEAU STATUT : {!Claim__c.Status__c}
+NUMÉRO DE SINISTRE : {!relatedTo.Name}
+NOUVEAU STATUT : {!relatedTo.Status__c}
 
 PROCHAINES ÉTAPES :
 Notre équipe vous contactera très prochainement pour vous accompagner dans la suite du traitement de votre dossier.
