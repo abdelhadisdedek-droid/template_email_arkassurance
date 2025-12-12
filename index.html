@@ -1,0 +1,266 @@
+<messaging:emailTemplate subject="Mise à jour de votre dossier de sinistre - {!Claim__c.Name}" recipientType="Contact" relatedToType="Claim__c">
+<messaging:htmlEmailBody >
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Styles de base pour la compatibilité maximale */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif; /* Plus sûr pour les e-mails */
+            background-color: #f4f7fa;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px; /* Léger arrondi */
+            overflow: hidden; /* Pour contenir les éléments */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Légère ombre */
+        }
+        /* Couleurs inspirées de votre charte graphique */
+        .color-primary-dark { color: #1e3a8a; } /* Bleu foncé */
+        .color-primary-blue { color: #3b82f6; } /* Bleu principal */
+        .color-accent-turq { color: #4dc0c9; } /* Turquoise/Cyan (utilisé pour les badges/liens) */
+        .bg-color-primary-dark { background-color: #1e3a8a; }
+        .bg-color-soft { background-color: #f0f8ff; } /* Bleu très clair pour fond/status box */
+
+        /* Header (Avec Logo et Banniére-texte) */
+        .header {
+            /* Inspiré de votre dégradé bleu-violet de la bannière */
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #6b21a8 100%);
+            padding: 20px 30px;
+            text-align: center;
+        }
+        .logo-img {
+            max-width: 150px; /* Taille appropriée pour un logo d'e-mail */
+            height: auto;
+            display: block;
+            margin: 0 auto 15px;
+        }
+        .header-title {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .tagline {
+            color: #dbeafe; /* Bleu très clair */
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Content */
+        .content {
+            padding: 30px;
+        }
+        .greeting {
+            color: #1e293b;
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .message {
+            color: #475569;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        /* Status Box - Mis en évidence par les couleurs */
+        .status-box {
+            background-color: #e0f2fe; /* Bleu clair */
+            border-left: 4px solid #3b82f6; /* Bordure Bleu principal */
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .status-label {
+            color: #64748b;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .claim-number {
+            color: #1e293b;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .status-badge {
+            display: inline-block;
+            background-color: #4dc0c9; /* Turquoise/Cyan pour le statut */
+            color: #ffffff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        /* Info Box - Utilisation du bleu foncé pour l'importance */
+        .info-box {
+            background-color: #f0f9ff; /* Bleu très très clair */
+            border-left: 4px solid #1e3a8a; /* Bordure Bleu foncé */
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 6px;
+        }
+        .info-box p {
+            margin: 0;
+            color: #1e293b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .info-box strong {
+             color: #1e3a8a; /* Titre en gras en bleu foncé */
+        }
+        .divider {
+            height: 1px;
+            background-color: #e2e8f0;
+            margin: 30px 0;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #f8fafc;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+        .signature {
+            color: #1e293b;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .company-name {
+            color: #3b82f6;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .footer-text, .contact-info {
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.7;
+            margin-top: 15px;
+        }
+        .contact-info p {
+             margin: 5px 0;
+        }
+
+        /* Lien de l'espace client (Ajouté) */
+        .cta-button {
+            display: inline-block;
+            background-color: #3b82f6; 
+            color: #ffffff !important; 
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <img src="[URL_DE_VOTRE_LOGO_SHIELD_ICI]" alt="Logo ARKX ASSURANCE" class="logo-img" width="80" height="auto" />
+            
+            <h1 class="header-title">Protection Intelligente</h1>
+            <p class="tagline">Propulsée par l'Intelligence Artificielle</p>
+        </div>
+        
+        <div class="content">
+            <p class="greeting">Bonjour **{!Contact.FirstName} {!Contact.LastName}**, </p>
+            
+            <p class="message">
+                Nous tenons à vous informer que votre dossier de sinistre a été mis à jour. Vous trouverez ci-dessous les détails de cette mise à jour.
+            </p>
+            
+            <div class="status-box">
+                <div class="status-label">Numéro de sinistre</div>
+                <div class="claim-number">{!Claim__c.Name}</div>
+                
+                <div class="status-label">Nouveau statut</div>
+                <span class="status-badge">{!Claim__c.Status__c}</span>
+            </div>
+            
+            <div class="info-box">
+                <p>
+                    <strong>ℹ️ Prochaines étapes :</strong><br/>
+                    Notre équipe vous contactera très prochainement pour vous accompagner dans la suite du traitement de votre dossier. Vous pouvez également consulter l'avancement détaillé sur votre espace client.
+                </p>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="[LIEN_VERS_VOTRE_ESPACE_CLIENT_ICI]" class="cta-button">
+                    Accéder à mon Espace Client
+                </a>
+            </div>
+            
+            <p class="message" style="margin-top: 25px;">
+                Nous restons à votre disposition pour toute question ou information complémentaire concernant votre sinistre.
+            </p>
+            
+            <div class="divider"></div>
+            
+            <p class="message" style="font-size: 14px; color: #64748b; text-align: center;">
+                Si vous avez des questions urgentes, n'hésitez pas à nous contacter directement.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p class="signature">Cordialement,</p>
+            <p class="company-name">ARKX ASSURANCE</p>
+            
+            <div class="contact-info">
+                <p>Votre partenaire de confiance pour sécuriser votre quotidien.</p>
+                <p>Service Client disponible du lundi au vendredi de 9h à 18h</p>
+                <p style="margin-top: 0;">📧 **contact@arkx-assurance.com** | 📞 **+33 (0)1 XX XX XX XX**</p>
+            </div>
+            
+            <p class="footer-text">
+                Ce message est généré automatiquement, merci de ne pas y répondre.<br/>
+                © 2024 Arkx Assurance - Tous droits réservés
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+</messaging:htmlEmailBody>
+
+<messaging:plainTextEmailBody>
+Bonjour {!Contact.FirstName} {!Contact.LastName},
+
+Nous tenons à vous informer que votre dossier de sinistre a été mis à jour.
+
+NUMÉRO DE SINISTRE : {!Claim__c.Name}
+NOUVEAU STATUT : {!Claim__c.Status__c}
+
+PROCHAINES ÉTAPES :
+Notre équipe vous contactera très prochainement pour vous accompagner dans la suite du traitement de votre dossier.
+Vous pouvez consulter l'avancement détaillé sur votre Espace Client : [LIEN_VERS_VOTRE_ESPACE_CLIENT_ICI]
+
+Nous restons à votre disposition pour toute question ou information complémentaire concernant votre sinistre.
+
+Cordialement,
+ARKX ASSURANCE
+
+Service Client disponible du lundi au vendredi de 9h à 18h
+📧 contact@arkx-assurance.com | 📞 +33 (0)1 XX XX XX XX
+
+Ce message est généré automatiquement, merci de ne pas y répondre.
+© 2024 Arkx Assurance - Tous droits réservés
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>
